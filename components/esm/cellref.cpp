@@ -79,6 +79,9 @@ void ESM::CellRef::loadData(ESMReader &esm, bool &isDeleted)
             case ESM::FourCC<'X','S','O','L'>::value:
                 mSoul = esm.getHString();
                 break;
+            case ESM::FourCC<'S','T','O','L'>::value:
+                esm.getHT(mStolen);
+                break;
             case ESM::FourCC<'C','N','A','M'>::value:
                 mFaction = esm.getHString();
                 break;
@@ -134,21 +137,25 @@ void ESM::CellRef::save (ESMWriter &esm, bool wideRefNum, bool inInventory, bool
 
     esm.writeHNCString("NAME", mRefID);
 
-    if (isDeleted) {
+    if (isDeleted)
+    {
         esm.writeHNCString("DELE", "");
         return;
     }
 
-    if (mScale != 1.0) {
+    if (mScale != 1.0)
+    {
         esm.writeHNT("XSCL", mScale);
     }
 
     esm.writeHNOCString("ANAM", mOwner);
     esm.writeHNOCString("BNAM", mGlobalVariable);
     esm.writeHNOCString("XSOL", mSoul);
+    esm.writeHNT("STOL", mStolen);
 
     esm.writeHNOCString("CNAM", mFaction);
-    if (mFactionRank != -2) {
+    if (mFactionRank != -2)
+    {
         esm.writeHNT("INDX", mFactionRank);
     }
 
@@ -168,7 +175,8 @@ void ESM::CellRef::save (ESMWriter &esm, bool wideRefNum, bool inInventory, bool
         esm.writeHNOCString("DNAM", mDestCell);
     }
 
-    if (!inInventory && mLockLevel != 0) {
+    if (!inInventory && mLockLevel != 0)
+    {
         esm.writeHNT("FLTV", mLockLevel);
     }
 
@@ -205,6 +213,7 @@ void ESM::CellRef::blank()
     mTrap.clear();
     mReferenceBlocked = -1;
     mTeleport = false;
+    mStolen = false;
 
     for (int i=0; i<3; ++i)
     {

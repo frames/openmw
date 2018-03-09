@@ -1,5 +1,6 @@
 #include "inventoryitemmodel.hpp"
 
+#include <iostream>
 #include <sstream>
 
 #include "../mwmechanics/actorutil.hpp"

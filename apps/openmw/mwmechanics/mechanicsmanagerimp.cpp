@@ -1064,6 +1064,7 @@ namespace MWMechanics
         MWWorld::ContainerStore& store = player.getClass().getContainerStore(player);
         for (MWWorld::ContainerStoreIterator it = store.begin(); it != store.end(); ++it)
         {
+            /*
             StolenItemsMap::iterator stolenIt = mStolenItems.find(Misc::StringUtils::lowerCase(it->getCellRef().getRefId()));
             if (stolenIt == mStolenItems.end())
                 continue;
@@ -1078,9 +1079,12 @@ namespace MWMechanics
                     owners.erase(ownerIt++);
                 else
                     ++ownerIt;
-            }
+            } */
 
-            int toMove = it->getRefData().getCount() - itemCount;
+            if (it->getCellRef().isStolen() == false)
+                continue;
+
+            int toMove = it->getRefData().getCount();
 
             targetContainer.getClass().getContainerStore(targetContainer).add(*it, toMove, targetContainer);
             store.remove(*it, toMove, player);
@@ -1141,7 +1145,10 @@ namespace MWMechanics
         {
             const MWWorld::Ptr victimRef = MWBase::Environment::get().getWorld()->searchPtr(ownerCellRef->getOwner(), true);
             if (victimRef.isEmpty() || !victimRef.getClass().getCreatureStats(victimRef).isDead())
+            {
                 mStolenItems[Misc::StringUtils::lowerCase(item.getCellRef().getRefId())][owner] += count;
+                item.getCellRef().setStolen(true);
+            }
         }
         if (alarm)
             commitCrime(ptr, victim, OT_Theft, item.getClass().getValue(item) * count);

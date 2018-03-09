@@ -34,6 +34,7 @@ namespace MWGui
     ItemWidget::ItemWidget()
         : mItem(NULL)
         , mItemShadow(NULL)
+        , mStolenItem(NULL)
         , mFrame(NULL)
         , mText(NULL)
     {
@@ -59,6 +60,10 @@ namespace MWGui
         assignWidget(mText, "Text");
         if (mText)
             mText->setNeedMouseFocus(false);
+
+        assignWidget(mStolenItem, "StolenItem");
+        if (mStolenItem)
+            mStolenItem->setNeedMouseFocus(false);
 
         Base::initialiseOverride();
     }
@@ -118,6 +123,8 @@ namespace MWGui
                 mFrame->setImageTexture("");
             if (mItemShadow)
                 mItemShadow->setImageTexture("");
+            if (mStolenItem)
+                mStolenItem->setImageTexture("");
             mItem->setImageTexture("");
             mText->setCaption("");
             mCurrentIcon.clear();
@@ -126,10 +133,12 @@ namespace MWGui
         }
 
         bool isMagic = !ptr.getClass().getEnchantment(ptr).empty();
+        bool isStolen = ptr.getCellRef().isStolen();
 
         std::string backgroundTex = "textures\\menu_icon";
         if (isMagic)
             backgroundTex += "_magic";
+
         if (state == None)
         {
             if (!isMagic)
@@ -151,6 +160,9 @@ namespace MWGui
             setFrame(backgroundTex, MyGUI::IntCoord(0,0,42,42));
 
         setIcon(ptr);
+
+        if (isStolen && mStolenItem)
+            mStolenItem->setImageTexture("textures\\menu_icon_stolen.dds");
     }
 
 }

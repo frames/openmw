@@ -26,7 +26,8 @@ namespace MWGui
             None,
             Equip,
             Barter,
-            Magic
+            Magic,
+            Stolen
         };
 
         /// Set count to be displayed in a textbox over the item
@@ -45,6 +46,7 @@ namespace MWGui
 
         MyGUI::ImageBox* mItem;
         MyGUI::ImageBox* mItemShadow;
+        MyGUI::ImageBox* mStolenItem;
         MyGUI::ImageBox* mFrame;
         MyGUI::TextBox* mText;
 
