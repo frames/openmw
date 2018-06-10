@@ -1064,23 +1064,6 @@ namespace MWMechanics
         MWWorld::ContainerStore& store = player.getClass().getContainerStore(player);
         for (MWWorld::ContainerStoreIterator it = store.begin(); it != store.end(); ++it)
         {
-            /*
-            StolenItemsMap::iterator stolenIt = mStolenItems.find(Misc::StringUtils::lowerCase(it->getCellRef().getRefId()));
-            if (stolenIt == mStolenItems.end())
-                continue;
-            OwnerMap& owners = stolenIt->second;
-            int itemCount = it->getRefData().getCount();
-            for (OwnerMap::iterator ownerIt = owners.begin(); ownerIt != owners.end();)
-            {
-                int toRemove = std::min(itemCount, ownerIt->second);
-                itemCount -= toRemove;
-                ownerIt->second -= toRemove;
-                if (ownerIt->second == 0)
-                    owners.erase(ownerIt++);
-                else
-                    ++ownerIt;
-            } */
-
             if (it->getCellRef().isStolen() == false)
                 continue;
 
