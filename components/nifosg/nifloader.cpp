@@ -1344,8 +1344,10 @@ namespace NifOsg
                     }
                     else if (i == Nif::NiTexturingProperty::BumpTexture)
                     {
+                        float lumaScale = texprop->lumaScale;
+                        stateset->addUniform(new osg::Uniform("envMapColor", osg::Vec4f(lumaScale,lumaScale,lumaScale,1)));
                         // Set this texture to Off by default since we can't render it with the fixed-function pipeline
-                        stateset->setTextureMode(texUnit, GL_TEXTURE_2D, osg::StateAttribute::OFF);
+                        stateset->setTextureMode(3, GL_TEXTURE_2D, osg::StateAttribute::OFF);
                     }
                     else if (i == Nif::NiTexturingProperty::DecalTexture)
                     {
