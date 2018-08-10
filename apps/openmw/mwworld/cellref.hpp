@@ -58,6 +58,9 @@ namespace MWWorld
 
         void setEnchantmentCharge(float charge);
 
+        bool isStolen() const;
+        void setStolen(bool stolen);
+
         // For weapon or armor, this is the remaining item health.
         // For tools (lockpicks, probes, repair hammer) it is the remaining uses.
         // If this returns int(-1) it means full health.

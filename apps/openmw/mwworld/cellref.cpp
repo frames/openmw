@@ -79,6 +79,20 @@ namespace MWWorld
         }
     }
 
+    bool CellRef::isStolen() const
+    {
+        return mCellRef.mStolen;
+    }
+
+    void CellRef::setStolen(bool stolen)
+    {
+        if (stolen != mCellRef.mStolen)
+        {
+            mChanged = true;
+            mCellRef.mStolen = stolen;
+        }
+    }
+
     int CellRef::getCharge() const
     {
         return mCellRef.mChargeInt;

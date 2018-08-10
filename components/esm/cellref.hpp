@@ -83,6 +83,9 @@ namespace ESM
             // if it should open through animation.
             bool mTeleport;
 
+            // Marks if the object was stolen
+            bool mStolen;
+
             // Teleport location for the door, if this is a teleporting door.
             Position mDoorDest;
 

@@ -126,6 +126,7 @@
                     <Property key="Colour" value="0 0 0"/>
                     <Property key="Alpha" value="0.5"/>
                 </Widget>
+                <Widget type="ImageBox" skin="ImageBox" position="5 21 16 16" align="Stretch" name="StolenItem"/>
             </Widget>
         </Widget>
     </Resource>
@@ -150,6 +151,7 @@
                     <Property key="Colour" value="0 0 0"/>
                     <Property key="Alpha" value="0.5"/>
                 </Widget>
+                <Widget type="ImageBox" skin="ImageBox" position="2 16 16 16" align="Stretch" name="StolenItem"/>
             </Widget>
         </Widget>
     </Resource>
@@ -166,6 +168,7 @@
                     <Property key="Colour" value="0 0 0"/>
                     <Property key="Alpha" value="0.5"/>
                 </Widget>
+                <Widget type="ImageBox" skin="ImageBox" position="5 21 16 16" align="Stretch" name="StolenItem"/>
             </Widget>
 
             <Widget type="Widget" skin="MW_Box_Overlay" position="0 0 50 50" align="Stretch"/>

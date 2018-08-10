@@ -76,6 +76,11 @@ namespace
             if (result != 0)
                 return result < 0;
 
+            bool leftStolen = left.mBase.getCellRef().isStolen();
+            bool rightStolen = right.mBase.getCellRef().isStolen();
+            if (leftStolen != rightStolen)
+                return leftStolen < rightStolen;
+
             // compare items by enchantment:
             // 1. enchanted items showed before non-enchanted
             // 2. item with lesser charge percent comes after items with more charge percent
