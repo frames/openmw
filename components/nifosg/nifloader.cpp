@@ -37,6 +37,7 @@
 #include <components/sceneutil/skeleton.hpp>
 #include <components/sceneutil/riggeometry.hpp>
 #include <components/sceneutil/morphgeometry.hpp>
+#include <components/settings/settings.hpp>
 
 #include "particle.hpp"
 #include "userdata.hpp"
@@ -595,11 +596,14 @@ namespace NifOsg
             const Nif::NiNode *ninode = dynamic_cast<const Nif::NiNode*>(nifNode);
             if(ninode)
             {
-                const Nif::NodeList &effects = ninode->effects;
-                for (size_t i = 0; i < effects.length(); ++i)
+                if (!Settings::Manager::getBool("ignore texture effects", "Shaders"))
                 {
-                    if (!effects[i].empty())
-                        handleEffect(effects[i].getPtr(), node, imageManager);
+                    const Nif::NodeList &effects = ninode->effects;
+                    for (size_t i = 0; i < effects.length(); ++i)
+                    {
+                        if (!effects[i].empty())
+                            handleEffect(effects[i].getPtr(), node, imageManager);
+                    }
                 }
 
                 const Nif::NodeList &children = ninode->children;
