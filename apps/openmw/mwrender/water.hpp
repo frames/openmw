@@ -69,7 +69,6 @@ namespace MWRender
 
         const std::string mResourcePath;
 
-        bool mInterior;
         bool mEnabled;
         bool mToggled;
         float mTop;
