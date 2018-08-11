@@ -37,7 +37,6 @@
 #include <components/sceneutil/skeleton.hpp>
 #include <components/sceneutil/riggeometry.hpp>
 #include <components/sceneutil/morphgeometry.hpp>
-#include <components/settings/settings.hpp>
 
 #include "particle.hpp"
 #include "userdata.hpp"
@@ -596,14 +595,11 @@ namespace NifOsg
             const Nif::NiNode *ninode = dynamic_cast<const Nif::NiNode*>(nifNode);
             if(ninode)
             {
-                if (!Settings::Manager::getBool("ignore texture effects", "Shaders"))
+                const Nif::NodeList &effects = ninode->effects;
+                for (size_t i = 0; i < effects.length(); ++i)
                 {
-                    const Nif::NodeList &effects = ninode->effects;
-                    for (size_t i = 0; i < effects.length(); ++i)
-                    {
-                        if (!effects[i].empty())
-                            handleEffect(effects[i].getPtr(), node, imageManager);
-                    }
+                    if (!effects[i].empty())
+                        handleEffect(effects[i].getPtr(), node, imageManager);
                 }
 
                 const Nif::NodeList &children = ninode->children;
@@ -1344,10 +1340,8 @@ namespace NifOsg
                     }
                     else if (i == Nif::NiTexturingProperty::BumpTexture)
                     {
-                        float lumaScale = texprop->lumaScale;
-                        stateset->addUniform(new osg::Uniform("envMapColor", osg::Vec4f(lumaScale,lumaScale,lumaScale,1)));
                         // Set this texture to Off by default since we can't render it with the fixed-function pipeline
-                        stateset->setTextureMode(3, GL_TEXTURE_2D, osg::StateAttribute::OFF);
+                        stateset->setTextureMode(texUnit, GL_TEXTURE_2D, osg::StateAttribute::OFF);
                     }
                     else if (i == Nif::NiTexturingProperty::DecalTexture)
                     {

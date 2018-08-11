@@ -50,9 +50,9 @@ void NiTexturingProperty::read(NIFStream *nif)
     textures[5].read(nif); // Bump map
     if(textures[5].inUse)
     {
-        lumaScale = nif->getFloat();
-        lumaOffset = nif->getFloat();
-        // Ignore this one at the moment
+        // Ignore these at the moment
+        /*float lumaScale =*/ nif->getFloat();
+        /*float lumaOffset =*/ nif->getFloat();
         /*const Vector4 *lumaMatrix =*/ nif->getVector4();
     }
     textures[6].read(nif); // Decal

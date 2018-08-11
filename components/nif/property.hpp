@@ -101,9 +101,6 @@ public:
 
     Texture textures[7];
 
-    float lumaScale;
-    float lumaOffset;
-
     void read(NIFStream *nif);
     void post(NIFFile *nif);
 };
